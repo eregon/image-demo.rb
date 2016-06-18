@@ -1,3 +1,15 @@
+To run the demo:
+
+```bash
+ruby lib/sobel.rb tv://
+```
+
+You need to have `mplayer` in `$PATH`.
+
+The original README follows.
+
+---
+
 Video Processing with PyPy
 ==========================
 
