@@ -63,7 +63,7 @@ if $0 == __FILE__
   require_relative 'io'
 
   if ARGV.size >= 1
-    fn = ARGV.first
+    fn = ARGV.join(' ')
   else
     fn = 'test.avi -vf scale=640:480 -benchmark'
   end
