@@ -82,7 +82,9 @@ if $0 == __FILE__
     end
 
     t = Time.now
-    puts "%.3f fps %.3f average fps" % [1.0 / (t - start), (frame-2) / (t - start0)]
+    fps = 1.0 / (t - start)
+    avg = (frame-2) / (t - start0)
+    puts "%.3f fps %.3f average fps" % [fps, avg]
     start = t
     if frame == 2
       start0 = Time.now
