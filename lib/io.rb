@@ -2,7 +2,7 @@
 def mplayer(image_class, fn = 'tv://', options = '')
   return to_enum(__method__, image_class, fn, options) unless block_given?
 
-  IO.popen("mplayer -really-quiet -noframedrop #{options} -vo yuv4mpeg:file=/dev/stdout 2>/dev/null </dev/null #{fn}") do |f|
+  IO.popen("mplayer -really-quiet -noframedrop #{options} -vo yuv4mpeg:file=/dev/stdout 2>/dev/null </dev/null #{fn}", "rb") do |f|
     header = f.readline
     raise "Bad header" unless /W(\d+) H(\d+)/ =~ header
     w, h = Integer($1), Integer($2)
