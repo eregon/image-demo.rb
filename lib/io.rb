@@ -9,7 +9,7 @@ def mplayer(image_class, fn = 'tv://', options = '')
     loop {
       header = f.readline
       break if header != "FRAME\n"
-      yield image_class.new(w, h, f)
+      yield image_class.new(w, h).from_io(f)
       f.read(w*h/2) # Color data
     }
   end

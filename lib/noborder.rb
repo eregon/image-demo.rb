@@ -2,14 +2,15 @@
 class NoBorderImage
   attr_reader :width, :height, :data
 
-  def initialize(w, h, from_file = nil)
+  def initialize(w, h)
     @width = w
     @height = h
-    if from_file
-      @data = fromfile.read(w*h).bytes
-    else
-      @data = Array.new(w*h, 0)
-    end
+    @data = Array.new(w*h, 0)
+  end
+
+  def from_io(io)
+    @data = io.read(@width*@height).bytes
+    self
   end
 
   def initialize_copy(from)
@@ -68,16 +69,16 @@ class NoBorderImage
 end
 
 class NoBorderImagePadded < NoBorderImage
-  def initialize(w, h, fromfile=nil)
+  def initialize(w, h)
     @width = w
     @height = h
-    if !fromfile
-      @data = Array.new(w*(h+2)+2, 0)
-    else
-      @data = Array.new(w+1, 0)
-      @data += fromfile.read(w*h).bytes
-      @data += Array.new(w+1, 0)
-    end
+    @data = Array.new(w*(h+2)+2, 0)
+  end
+
+  def from_io(io)
+    w, h = @width, @height
+    @data[(w+1)...-(w+1)] = io.read(w*h).bytes
+    self
   end
 
   def index(p, y = nil)
